@@ -1,4 +1,6 @@
 package contacts;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class Contact {
     private String name;
@@ -8,7 +10,12 @@ public class Contact {
     public Contact(String name, String surname, String phoneNumber) {
         this.name = name;
         this.surname = surname;
-        this.phoneNumber = phoneNumber;
+        if (validatePhoneNumber(phoneNumber)) {
+            this.phoneNumber = phoneNumber;
+        } else {
+            System.out.println("Wrong number format!");
+            this.phoneNumber = "";
+        }
     }
 
     public void setName(String name) {
@@ -20,7 +27,11 @@ public class Contact {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        if (validatePhoneNumber(phoneNumber)) {
+            this.phoneNumber = phoneNumber;
+        } else {
+            this.phoneNumber = "";
+        }
     }
 
     public String getName() {
@@ -32,6 +43,20 @@ public class Contact {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        if (hasNumber()) {
+            return phoneNumber;
+        }
+        return "[no number]";
+    }
+
+    public boolean hasNumber() {
+        return phoneNumber == "" ? false : true;
+    }
+
+    private boolean validatePhoneNumber(String phoneNumber) {
+        Pattern pattern = Pattern.compile("^(\\+)?(\\w?)(\\(\\w{2,}\\)[\\s-]\\w{2,}|\\w{2,}[\\s-]\\(\\w{2,}\\)|\\w{2,}[\\s-]\\w{2,}|\\(\\w{2,}\\))?[\\s-]?([ -]\\w{2,})?[\\s-]?(\\w{2,}[\\s-])?(\\w{2,})?$");
+        Matcher matcher = pattern.matcher(phoneNumber);
+
+        return matcher.matches();
     }
 }

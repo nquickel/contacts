@@ -3,19 +3,40 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner stdin = new Scanner(System.in);
-        PhoneBook phoneBook;
+        Scanner scanner = new Scanner(System.in);
+        PhoneBook phoneBook = new PhoneBook();
         String name;
         String surname;
         String phoneNumber;
 
-        System.out.println("Enter the name of the person:");
-        name = stdin.nextLine();
-        System.out.println("Enter the surname of the person:");
-        surname = stdin.nextLine();
-        System.out.println("Enter the number:");
-        phoneNumber = stdin.nextLine();
+        String action;
+        boolean run = true;
 
-        phoneBook = new PhoneBook(name, surname, phoneNumber);
+        System.out.println("Enter action (add, remove, edit, count, list, exit):");
+        do {
+            action = scanner.nextLine();
+            switch (action) {
+                case "add":
+                    phoneBook.addContact();
+                    break;
+                case "remove":
+                    phoneBook.removeContact();
+                    break;
+                case "edit":
+                    phoneBook.editContact();
+                    break;
+                case "count":
+                    phoneBook.countContacts();
+                    break;
+                case "list":
+                    phoneBook.listContacts();
+                    break;
+                case "exit":
+                    run = false;
+                    break;
+                default:
+                    break;
+            }
+        } while (run);
     }
 }
