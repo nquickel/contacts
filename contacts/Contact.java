@@ -1,29 +1,16 @@
 package contacts;
+import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class Contact {
-    private String name;
-    private String surname;
-    private String phoneNumber;
-
-    public Contact(String name, String surname, String phoneNumber) {
-        this.name = name;
-        this.surname = surname;
-        if (validatePhoneNumber(phoneNumber)) {
-            this.phoneNumber = phoneNumber;
-        } else {
-            System.out.println("Wrong number format!");
-            this.phoneNumber = "";
-        }
-    }
+    protected String name;
+    protected String phoneNumber;
+    protected LocalDateTime created;
+    protected LocalDateTime modified;
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -34,12 +21,16 @@ public class Contact {
         }
     }
 
-    public String getName() {
-        return name;
+    public void setCreated() {
+        created = LocalDateTime.now();
     }
 
-    public String getSurname() {
-        return surname;
+    public void setModified() {
+        modified = LocalDateTime.now();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getPhoneNumber() {
@@ -49,12 +40,27 @@ public class Contact {
         return "[no number]";
     }
 
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public LocalDateTime getModified() {
+        return modified;
+    }
+
     public boolean hasNumber() {
         return phoneNumber == "" ? false : true;
     }
 
-    private boolean validatePhoneNumber(String phoneNumber) {
-        Pattern pattern = Pattern.compile("^(\\+)?(\\w?)(\\(\\w{2,}\\)[\\s-]\\w{2,}|\\w{2,}[\\s-]\\(\\w{2,}\\)|\\w{2,}[\\s-]\\w{2,}|\\(\\w{2,}\\))?[\\s-]?([ -]\\w{2,})?[\\s-]?(\\w{2,}[\\s-])?(\\w{2,})?$");
+    public static String formatData(Object data) {
+        if (data == null) {
+            return "[no data]";
+        }
+        return data.toString();
+    }
+
+    protected boolean validatePhoneNumber(String phoneNumber) {
+        Pattern pattern = Pattern.compile("^(\\+)?(\\w?)\\s?(\\(\\w{2,}\\)[\\s-]\\w{2,}|\\w{2,}[\\s-]\\(\\w{2,}\\)|\\w{2,}[\\s-]\\w{2,}|\\(\\w{2,}\\))?[\\s-]?([ -]\\w{2,})?[\\s-]?(\\w{2,}[\\s-])?(\\w{2,})?$");
         Matcher matcher = pattern.matcher(phoneNumber);
 
         return matcher.matches();

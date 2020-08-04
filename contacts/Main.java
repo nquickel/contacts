@@ -5,15 +5,12 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         PhoneBook phoneBook = new PhoneBook();
-        String name;
-        String surname;
-        String phoneNumber;
 
         String action;
         boolean run = true;
 
-        System.out.println("Enter action (add, remove, edit, count, list, exit):");
         do {
+            System.out.println("Enter action (add, remove, edit, count, list, exit):");
             action = scanner.nextLine();
             switch (action) {
                 case "add":
@@ -28,8 +25,8 @@ public class Main {
                 case "count":
                     phoneBook.countContacts();
                     break;
-                case "list":
-                    phoneBook.listContacts();
+                case "info":
+                    phoneBook.displayContactInfo();
                     break;
                 case "exit":
                     run = false;
@@ -37,6 +34,7 @@ public class Main {
                 default:
                     break;
             }
+            System.out.print("\n");
         } while (run);
     }
 }
