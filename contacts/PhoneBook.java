@@ -195,25 +195,14 @@ public class PhoneBook {
             contact = contacts.get(recordNum - 1);
             if (contact instanceof Person) {
                 Person person = (Person) contact;
-                System.out.println("Name: " + person.getName());
-                System.out.println("Surname: " + person.getSurname());
-                System.out.println("Birth date: " + Contact.formatData(person.getBirthDate()));
-                System.out.println("Gender: " + Contact.formatData(person.getGender()));
-                System.out.println("Number: " + person.getPhoneNumber());
-                System.out.println("Time created: " + person.getCreated());
-                System.out.println("Time last edit: " + person.getModified());
+                System.out.println(person);
             } else {
                 Organization org = (Organization) contact;
-                System.out.println("Organization name: " + org.getName());
-                System.out.println("Address: " + org.getAddress());
-                System.out.println("Number: " + org.getPhoneNumber());
-                System.out.println("Time created: " + org.getCreated());
-                System.out.println("Time last edit: " + org.getModified());
+                System.out.println(org);
             }
         } else {
             System.out.println("Unknown record number.");
         }
-
     }
 
     private boolean contactExists(int recordNum) {

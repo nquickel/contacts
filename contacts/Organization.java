@@ -24,4 +24,13 @@ public class Organization extends Contact {
     public String getAddress() {
         return address;
     }
+
+    @Override
+    public String toString() {
+        return "Organization name: " + name + "\n" +
+               "Address: " + address + "\n" +
+               "Number: " + phoneNumber + "\n" +
+               "Time created: " + created + "\n" +
+               "Time last edit: " + modified;
+    }
 }

@@ -62,4 +62,15 @@ public class Person extends Contact {
         return gender;
     }
 
+    @Override
+    public String toString() {
+        return "Name: " + name + "\n" +
+               "Surname: " + surname + "\n" +
+               "Birth date: " + Contact.formatData(birthDate) + "\n" +
+               "Gender: " + Contact.formatData(gender) + "\n" +
+               "Number: " + phoneNumber + "\n" +
+               "Time created: " + created + "\n" +
+               "Time last edit: " + modified;
+    }
+
 }
